@@ -1,7 +1,6 @@
 package com.radichev.foreignexchange.service.serviceImpl;
 
 import com.radichev.foreignexchange.config.CurrencyLayerConfiguration;
-import com.radichev.foreignexchange.exception.ConversionCriteriaException;
 import com.radichev.foreignexchange.exception.RateNotFoundException;
 import com.radichev.foreignexchange.model.RateBindingModel;
 import com.radichev.foreignexchange.model.currencyLayerModels.LiveRate;
@@ -13,14 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -82,6 +78,4 @@ class RateServiceImplTest {
 
         Assertions.assertEquals(exception.getMessage(), "Rate not found: USD");
     }
-
-
 }

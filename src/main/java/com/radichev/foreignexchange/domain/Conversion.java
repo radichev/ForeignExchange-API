@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "conversion")
+@Table(name = "conversions")
 public class Conversion {
     private String id;
     private String currencyFrom;
@@ -48,7 +48,7 @@ public class Conversion {
         this.id = id;
     }
 
-    @Column
+    @Column(nullable = false)
     public String getCurrencyFrom() {
         return currencyFrom;
     }
@@ -57,7 +57,7 @@ public class Conversion {
         this.currencyFrom = currencyFrom;
     }
 
-    @Column
+    @Column(nullable = false)
     public String getCurrencyTo() {
         return currencyTo;
     }
@@ -66,7 +66,7 @@ public class Conversion {
         this.currencyTo = currencyTo;
     }
 
-    @Column
+    @Column(nullable = false)
     public BigDecimal getExchangeRate() {
         return exchangeRate;
     }
@@ -75,7 +75,7 @@ public class Conversion {
         this.exchangeRate = exchangeRate;
     }
 
-    @Column
+    @Column(nullable = false)
     public BigDecimal getAmountBefore() {
         return amountBefore;
     }
@@ -84,7 +84,7 @@ public class Conversion {
         this.amountBefore = amountBefore;
     }
 
-    @Column
+    @Column(nullable = false)
     public BigDecimal getAmountAfter() {
         return amountAfter;
     }
@@ -93,7 +93,7 @@ public class Conversion {
         this.amountAfter = amountAfter;
     }
 
-    @Column
+    @Column(nullable = false)
     public LocalDate getConversionDate() {
         return conversionDate;
     }

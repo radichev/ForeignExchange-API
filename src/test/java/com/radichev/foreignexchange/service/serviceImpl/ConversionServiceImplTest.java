@@ -2,7 +2,6 @@ package com.radichev.foreignexchange.service.serviceImpl;
 
 import com.radichev.foreignexchange.domain.Conversion;
 import com.radichev.foreignexchange.exception.ConversionCriteriaException;
-import com.radichev.foreignexchange.exception.RateNotFoundException;
 import com.radichev.foreignexchange.model.ConversionBindingModel;
 import com.radichev.foreignexchange.model.ConversionCurrencyViewModel;
 import com.radichev.foreignexchange.model.RateBindingModel;
@@ -39,7 +38,7 @@ class ConversionServiceImplTest {
     @Mock
     private RateService rateService;
 
-    private ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper modelMapper = new ModelMapper();
 
     private Conversion conversion;
 
@@ -72,21 +71,6 @@ class ConversionServiceImplTest {
         Assertions.assertEquals(conversionCurrencyViewModel.getAmountAfter(), conversion.getAmountAfter());
         Assertions.assertEquals(conversionCurrencyViewModel.getId(), conversion.getId());
     }
-
-//    @Test
-//    void exchangeCurrencyShouldThrowNotFoundExceptionInCaseOfWrongCurrencyInput() {
-//        ConversionBindingModel conversionBindingModel = new ConversionBindingModel();
-//        conversionBindingModel.setAmount(BigDecimal.valueOf(10));
-//        conversionBindingModel.setCurrencyFrom("EUR");
-//        conversionBindingModel.setCurrencyTo("BGN");
-//
-//
-//        Exception exception = Assertions.assertThrows(RateNotFoundException.class, () -> {
-//            this.conversionService.exchangeCurrency(conversionBindingModel);
-//        });
-//
-//        Assertions.assertEquals(exception.getMessage(), "Rate not found: EURO");
-//    }
 
     @Test
     void findAllConversionsByCriteriaShouldThrowConversionCriteriaExceptionInCaseOfWrongInput() {
