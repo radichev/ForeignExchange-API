@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-public class ConversionViewModel {
+public class ConversionCurrencyViewModel {
     private BigDecimal amountAfter;
     private String id;
 
-    public ConversionViewModel() {
+    public ConversionCurrencyViewModel() {
     }
 
     @JsonProperty("amount")
@@ -20,6 +20,7 @@ public class ConversionViewModel {
         this.amountAfter = amountAfter;
     }
 
+    @JsonProperty("transactionId")
     public String getId() {
         return id;
     }

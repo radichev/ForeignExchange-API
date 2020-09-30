@@ -17,7 +17,8 @@ public class RateServiceImpl implements RateService {
     private final CurrencyLayerConfiguration currencyLayerConfiguration;
 
     @Autowired
-    public RateServiceImpl(RestTemplate restTemplate, CurrencyLayerConfiguration currencyLayerConfiguration) {
+    public RateServiceImpl(RestTemplate restTemplate,
+                           CurrencyLayerConfiguration currencyLayerConfiguration) {
         this.restTemplate = restTemplate;
         this.currencyLayerConfiguration = currencyLayerConfiguration;
     }
