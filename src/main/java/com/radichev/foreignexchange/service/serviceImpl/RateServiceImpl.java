@@ -1,11 +1,14 @@
 package com.radichev.foreignexchange.service.serviceImpl;
 
 import com.radichev.foreignexchange.config.CurrencyLayerConfiguration;
+import com.radichev.foreignexchange.exception.ApiCallException;
+import com.radichev.foreignexchange.exception.RateNotFoundException;
 import com.radichev.foreignexchange.model.RateBindingModel;
 import com.radichev.foreignexchange.model.currencyLayerModels.LiveRate;
 import com.radichev.foreignexchange.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -32,10 +35,18 @@ public class RateServiceImpl implements RateService {
                 .queryParam("source", rateBindingModel.getCurrencyFrom())
                 .queryParam("format", "1");
 
-        LiveRate liveRate = restTemplate.getForObject(builder.toUriString(), LiveRate.class);
+        try {
+            LiveRate liveRate = restTemplate.getForObject(builder.toUriString(), LiveRate.class);
 
-        return liveRate
-                .getQuotes()
-                .get(rateBindingModel.getCurrencyFrom() + rateBindingModel.getCurrencyTo());
+            if (liveRate.getQuotes() == null) {
+                throw new RateNotFoundException(String.format("Rate not found: %s", rateBindingModel.getCurrencyFrom()));
+            }
+
+            return liveRate
+                    .getQuotes()
+                    .get(rateBindingModel.getCurrencyFrom() + rateBindingModel.getCurrencyTo());
+        } catch (RestClientResponseException e) {
+            throw new ApiCallException(e.getRawStatusCode(), e.getResponseBodyAsString());
+        }
     }
 }

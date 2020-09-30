@@ -1,6 +1,7 @@
 package com.radichev.foreignexchange.service.serviceImpl;
 
 import com.radichev.foreignexchange.domain.Conversion;
+import com.radichev.foreignexchange.exception.ConversionCriteriaException;
 import com.radichev.foreignexchange.model.ConversionBindingModel;
 import com.radichev.foreignexchange.model.ConversionCurrencyViewModel;
 import com.radichev.foreignexchange.model.RateBindingModel;
@@ -53,6 +54,10 @@ public class ConversionServiceImpl implements ConversionService {
     public Page<ConversionViewModel> findAllConversionsByCriteria(String transactionId,
                                                                   LocalDate transactionDate,
                                                                   PageRequest pageRequest) {
+
+        if (transactionId.equals("") && transactionDate == null) {
+            throw new ConversionCriteriaException("At least one of the criterias should be available either Transaction Id or Transaction Date");
+        }
 
         return this.conversionRepository.findAllConversionsByCriteria(transactionId, transactionDate, pageRequest)
                 .map(conversion -> this.modelMapper.map(conversion, ConversionViewModel.class));
