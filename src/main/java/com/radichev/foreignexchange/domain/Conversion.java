@@ -20,6 +20,19 @@ public class Conversion {
     public Conversion() {
     }
 
+    public Conversion(String currencyFrom,
+                      String currencyTo,
+                      BigDecimal exchangeRate,
+                      BigDecimal amountBefore,
+                      BigDecimal amountAfter) {
+        this.currencyFrom = currencyFrom;
+        this.currencyTo = currencyTo;
+        this.exchangeRate = exchangeRate;
+        this.amountBefore = amountBefore;
+        this.amountAfter = amountAfter;
+        this.conversionDate = LocalDate.now();
+    }
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(

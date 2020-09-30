@@ -32,7 +32,7 @@ public class RateServiceImpl implements RateService {
                 .queryParam("format", "1");
 
         LiveRate liveRate = restTemplate.getForObject(builder.toUriString(), LiveRate.class);
-        
+
         return liveRate
                 .getQuotes()
                 .get(rateBindingModel.getCurrencyFrom() + rateBindingModel.getCurrencyTo());
