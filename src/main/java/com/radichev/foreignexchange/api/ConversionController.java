@@ -30,7 +30,7 @@ public class ConversionController {
                 .body(this.conversionService.exchangeCurrency(conversionBindingModel));
     }
 
-    @GetMapping(value = "/transactions/all",
+    @GetMapping(value = "/conversions/all",
             params = {"transactionId", "transactionDate", "page", "size"})
     public ResponseEntity<Page<ConversionViewModel>> findAllConversionsByCriteria(@RequestParam(value = "transactionId", required = false) String transactionId,
                                                                                   @RequestParam(value = "transactionDate", required = false)
